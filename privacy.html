@@ -17,7 +17,13 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <div class="demo-banner" role="status">DEMO — This is a preview, not a live website.</div>
+  <div class="demo-overlay" id="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-heading">
+    <div class="demo-modal">
+      <h2 id="demo-heading">DEMO ONLY</h2>
+      <p>This is a preview template, not a live business.</p>
+      <button type="button" class="demo-close" id="demo-close" disabled>Close</button>
+    </div>
+  </div>
 
   <header class="site-header">
     <div class="container header-inner">

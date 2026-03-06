@@ -17,11 +17,11 @@
 /* --- Custom Properties --- */
 :root {
   --color-primary: #00d4ff;
-  --color-primary-dim: rgba(0, 212, 255, 0.4);
-  --color-primary-glow: rgba(0, 212, 255, 0.6);
+  --color-primary-dim: rgba(0, 212, 255, 0.55);
+  --color-primary-glow: rgba(0, 212, 255, 0.8);
   --color-accent: #ffcc00;
-  --color-accent-dim: rgba(255, 204, 0, 0.4);
-  --color-accent-glow: rgba(255, 204, 0, 0.6);
+  --color-accent-dim: rgba(255, 204, 0, 0.55);
+  --color-accent-glow: rgba(255, 204, 0, 0.8);
   --color-bg: #0a0e1a;
   --color-bg-alt: #0f1628;
   --color-bg-card: #141c30;
@@ -34,11 +34,10 @@
   --font-body: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --max-width: 1200px;
   --header-height: 72px;
-  --demo-banner-height: 40px;
   --transition-base: 0.3s ease;
-  --glow-sm: 0 0 8px var(--color-primary-dim);
-  --glow-md: 0 0 16px var(--color-primary-dim), 0 0 32px rgba(0, 212, 255, 0.15);
-  --glow-lg: 0 0 20px var(--color-primary-glow), 0 0 40px var(--color-primary-dim), 0 0 80px rgba(0, 212, 255, 0.1);
+  --glow-sm: 0 0 10px var(--color-primary-dim);
+  --glow-md: 0 0 20px var(--color-primary-dim), 0 0 40px rgba(0, 212, 255, 0.2);
+  --glow-lg: 0 0 24px var(--color-primary-glow), 0 0 50px var(--color-primary-dim), 0 0 90px rgba(0, 212, 255, 0.15);
 }
 
 /* --- Reset & Base --- */
@@ -65,7 +64,7 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: calc(var(--demo-banner-height) + var(--header-height));
+  padding-top: var(--header-height);
 }
 
 main {
@@ -139,23 +138,68 @@ h1, h2, h3, h4 {
   transform: translateY(0);
 }
 
-/* --- Demo Banner --- */
-.demo-banner {
+/* --- Demo Modal Overlay --- */
+.demo-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  height: var(--demo-banner-height);
-  background: var(--color-accent);
-  color: #0a0e1a;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.demo-overlay.is-hidden {
+  display: none;
+}
+
+.demo-modal {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.2), 0 0 80px rgba(0, 212, 255, 0.1);
+}
+
+.demo-modal h2 {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.08em;
+}
+
+.demo-modal p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+.demo-close {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 2rem;
   font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity var(--transition-base), background var(--transition-base);
+}
+
+.demo-close:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.demo-close:not(:disabled):hover {
+  background: #33ddff;
 }
 
 /* --- Container --- */
@@ -186,12 +230,12 @@ h1, h2, h3, h4 {
 .btn-primary {
   background: var(--color-accent);
   color: #0a0e1a;
-  box-shadow: 0 0 12px var(--color-accent-dim);
+  box-shadow: 0 0 18px var(--color-accent-dim), 0 0 40px rgba(255, 204, 0, 0.2);
 }
 
 .btn-primary:hover {
   color: #0a0e1a;
-  box-shadow: 0 0 24px var(--color-accent-glow), 0 0 48px var(--color-accent-dim);
+  box-shadow: 0 0 30px var(--color-accent-glow), 0 0 60px var(--color-accent-dim), 0 0 90px rgba(255, 204, 0, 0.15);
   transform: translateY(-2px);
 }
 
@@ -199,13 +243,13 @@ h1, h2, h3, h4 {
   background: transparent;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
-  box-shadow: 0 0 8px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
 }
 
 .btn-outline:hover {
   color: var(--color-heading);
   background: rgba(0, 212, 255, 0.1);
-  box-shadow: 0 0 20px var(--color-primary-dim);
+  box-shadow: 0 0 24px var(--color-primary-dim), 0 0 48px rgba(0, 212, 255, 0.15);
   transform: translateY(-2px);
 }
 
@@ -248,7 +292,7 @@ h1, h2, h3, h4 {
 /* --- Site Header --- */
 .site-header {
   position: fixed;
-  top: var(--demo-banner-height);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
@@ -1063,15 +1107,15 @@ h1, h2, h3, h4 {
   @keyframes glow-pulse-strong {
     0%, 100% {
       text-shadow:
-        0 0 10px rgba(0, 212, 255, 0.4),
-        0 0 30px rgba(0, 212, 255, 0.2),
-        0 0 60px rgba(0, 212, 255, 0.1);
+        0 0 14px rgba(0, 212, 255, 0.7),
+        0 0 35px rgba(0, 212, 255, 0.45),
+        0 0 70px rgba(0, 212, 255, 0.2);
     }
     50% {
       text-shadow:
-        0 0 20px rgba(0, 212, 255, 0.6),
-        0 0 40px rgba(0, 212, 255, 0.3),
-        0 0 80px rgba(0, 212, 255, 0.15);
+        0 0 28px rgba(0, 212, 255, 0.9),
+        0 0 60px rgba(0, 212, 255, 0.55),
+        0 0 100px rgba(0, 212, 255, 0.25);
     }
   }
 
@@ -1083,13 +1127,13 @@ h1, h2, h3, h4 {
   @keyframes glow-pulse-moderate {
     0%, 100% {
       text-shadow:
-        0 0 6px rgba(0, 212, 255, 0.2),
-        0 0 20px rgba(0, 212, 255, 0.1);
+        0 0 10px rgba(0, 212, 255, 0.5),
+        0 0 28px rgba(0, 212, 255, 0.3);
     }
     50% {
       text-shadow:
-        0 0 12px rgba(0, 212, 255, 0.35),
-        0 0 30px rgba(0, 212, 255, 0.15);
+        0 0 22px rgba(0, 212, 255, 0.7),
+        0 0 50px rgba(0, 212, 255, 0.35);
     }
   }
 
@@ -1101,21 +1145,39 @@ h1, h2, h3, h4 {
 
   /* --- Logo Subtle Glow --- */
   @keyframes glow-pulse-subtle {
-    0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 212, 255, 0.2)); }
-    50% { filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4)); }
+    0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.35)); }
+    50% { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.6)); }
   }
 
   .logo svg {
     animation: glow-pulse-subtle 4s ease-in-out infinite;
   }
 
+  /* --- Yellow Button Glow Pulse --- */
+  @keyframes btn-glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(255, 204, 0, 0.55), 0 0 40px rgba(255, 204, 0, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 204, 0, 0.8), 0 0 60px rgba(255, 204, 0, 0.35), 0 0 90px rgba(255, 204, 0, 0.15);
+    }
+  }
+
+  .btn-primary {
+    animation: btn-glow-pulse 3s ease-in-out infinite;
+  }
+
+  .btn-primary:hover {
+    animation: none;
+  }
+
   /* --- Box Glow Pulse on Service Cards --- */
   @keyframes box-glow-pulse {
     0%, 100% {
-      box-shadow: 0 0 8px rgba(0, 212, 255, 0.08), 0 0 20px rgba(0, 212, 255, 0.04);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.15), 0 0 24px rgba(0, 212, 255, 0.08);
     }
     50% {
-      box-shadow: 0 0 16px rgba(0, 212, 255, 0.15), 0 0 36px rgba(0, 212, 255, 0.08);
+      box-shadow: 0 0 22px rgba(0, 212, 255, 0.25), 0 0 44px rgba(0, 212, 255, 0.12);
     }
   }
 
@@ -1164,16 +1226,16 @@ h1, h2, h3, h4 {
 
   /* --- Stat Number Glow --- */
   .stat-number {
-    text-shadow: 0 0 10px var(--color-primary-dim), 0 0 30px rgba(0, 212, 255, 0.1);
+    text-shadow: 0 0 14px var(--color-primary-dim), 0 0 36px rgba(0, 212, 255, 0.2);
   }
 
   /* --- CTA Phone Glow Pulse --- */
   @keyframes phone-glow {
     0%, 100% {
-      text-shadow: 0 0 10px var(--color-primary-dim), 0 0 30px rgba(0, 212, 255, 0.1);
+      text-shadow: 0 0 16px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3);
     }
     50% {
-      text-shadow: 0 0 20px var(--color-primary-glow), 0 0 40px var(--color-primary-dim);
+      text-shadow: 0 0 28px rgba(0, 212, 255, 0.85), 0 0 56px rgba(0, 212, 255, 0.4);
     }
   }
 
@@ -1383,50 +1445,8 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ============================================
-   Mobile Performance (max-width: 767px)
-   Reduce glow effects for performance
-   ============================================ */
-@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
-  .hero h1 span {
-    animation: none;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.1);
-  }
-
-  .section-header h2,
-  .about-preview-content h2,
-  .cta-section h2 {
-    animation: none;
-    text-shadow: 0 0 6px rgba(0, 212, 255, 0.2);
-  }
-
-  .service-card::before,
-  .service-detail-card::before {
-    animation: none;
-    background: linear-gradient(135deg, var(--color-primary-dim) 0%, transparent 50%, var(--color-accent-dim) 100%);
-  }
-
-  .service-card,
-  .service-detail-card {
-    animation: none;
-    box-shadow: 0 0 8px rgba(0, 212, 255, 0.06);
-  }
-
-  .cta-phone {
-    animation: none;
-    text-shadow: 0 0 10px var(--color-primary-dim);
-  }
-
-  .hero-bg {
-    animation: none;
-  }
-
-  .value-card {
-    animation: none;
-  }
-}
 
 /* Scroll margin for anchor links with sticky header */
 section[id] {
-  scroll-margin-top: calc(var(--demo-banner-height) + var(--header-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 }

@@ -255,6 +255,32 @@
   }
 
   /* ------------------------------------------
+     Demo Modal — timed close button
+     ------------------------------------------ */
+  var demoOverlay = document.getElementById('demo-overlay');
+  var demoClose = document.getElementById('demo-close');
+
+  if (demoOverlay && demoClose) {
+    var remaining = 3;
+    demoClose.textContent = 'Close (' + remaining + ')';
+
+    var countdown = setInterval(function () {
+      remaining--;
+      if (remaining > 0) {
+        demoClose.textContent = 'Close (' + remaining + ')';
+      } else {
+        clearInterval(countdown);
+        demoClose.textContent = 'Close';
+        demoClose.disabled = false;
+      }
+    }, 1000);
+
+    demoClose.addEventListener('click', function () {
+      demoOverlay.classList.add('is-hidden');
+    });
+  }
+
+  /* ------------------------------------------
      Contact Form (Demo — disabled submission)
      ------------------------------------------ */
   var contactForm = document.getElementById('contact-form');
