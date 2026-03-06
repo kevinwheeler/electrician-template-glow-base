@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="preload" href="/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/images/hero-480w.webp" as="image" type="image/webp" media="(max-width: 599px)">
-  <link rel="preload" href="/images/hero-800w.webp" as="image" type="image/webp" media="(min-width: 600px) and (max-width: 1023px)">
-  <link rel="preload" href="/images/hero.webp" as="image" type="image/webp" media="(min-width: 1024px)">
+  <link rel="preload" href="/fonts/rajdhani-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image"
+    imagesrcset="/images/hero-640w.webp 640w, /images/hero-1280w.webp 1280w, /images/hero-1920w.webp 1920w, /images/hero-2560w.webp 2560w, /images/hero-3840w.webp 3840w"
+    imagesizes="100vw"
+    type="image/webp">
   <title>Volt Electric — Licensed Electrician in Austin, TX</title>
   <meta name="description" content="Volt Electric provides residential and commercial electrical services in Austin, TX. Licensed, insured, and available for panel upgrades, EV chargers, and emergency repairs.">
   <meta name="theme-color" content="#0a0e1a">
@@ -88,9 +89,19 @@
   <main id="main-content">
     <!-- Hero -->
     <section class="hero" id="hero" aria-labelledby="hero-heading">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true">
+        <img
+          srcset="/images/hero-640w.webp 640w, /images/hero-1280w.webp 1280w, /images/hero-1920w.webp 1920w, /images/hero-2560w.webp 2560w, /images/hero-3840w.webp 3840w"
+          sizes="100vw"
+          src="/images/hero-1920w.webp"
+          alt=""
+          width="5504"
+          height="3072"
+          fetchpriority="high"
+        >
+      </div>
       <div class="container hero-content">
-        <h1 id="hero-heading">Expert <span>Electrical Services</span> in Austin, TX</h1>
+        <h1 id="hero-heading">Expert <span>Electrical Services</span><br>in Austin, TX</h1>
         <p>From panel upgrades to EV charger installations, Volt Electric delivers safe, reliable electrical work for homes and businesses across the Austin metro area.</p>
         <div class="hero-actions">
           <a href="tel:+15125550187" class="btn btn-primary">
@@ -180,21 +191,23 @@
           <div class="about-preview-content fade-in">
             <h2 id="about-heading">Austin's Trusted Electrical Experts</h2>
             <p>For over a decade, Volt Electric has served homeowners and businesses across the Austin metro area with honest, professional electrical work. We're fully licensed, bonded, and insured — and we stand behind every job.</p>
-            <div class="about-stats">
-              <div class="stat">
-                <span class="stat-number">10+</span>
-                <span class="stat-label">Years Experience</span>
+            <div class="about-stats-and-btn">
+              <div class="about-stats">
+                <div class="stat">
+                  <span class="stat-number">10+</span>
+                  <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number">2,500+</span>
+                  <span class="stat-label">Jobs Completed</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number">4.9</span>
+                  <span class="stat-label">Star Rating</span>
+                </div>
               </div>
-              <div class="stat">
-                <span class="stat-number">2,500+</span>
-                <span class="stat-label">Jobs Completed</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">4.9</span>
-                <span class="stat-label">Star Rating</span>
-              </div>
+              <a href="/about" class="btn btn-dark">Learn More About Us</a>
             </div>
-            <a href="/about" class="btn btn-dark">Learn More About Us</a>
           </div>
         </div>
       </div>
