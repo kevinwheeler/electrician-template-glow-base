@@ -1,5 +1,5 @@
 /* ============================================
-   Volt Electric — Electrician Template JS
+   Hawking Electrical — Electrician Template JS
    ============================================ */
 
 (function () {
@@ -9,9 +9,9 @@
      Placeholder defaults
      ------------------------------------------ */
   var DEFAULTS = {
-    name: 'Volt Electric',
+    name: 'Hawking Electrical',
     phone: '5129883749',
-    email: 'info@voltelectric.com',
+    email: 'info@hawkingelectrical.com',
     street: '4712 Braker Lane',
     city: 'Austin',
     state: 'TX',

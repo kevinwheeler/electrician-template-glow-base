@@ -13,4 +13,4 @@ Cards pulse in sequence (via animation-delay) to suggest electricity traveling t
 Creates a "current flowing around the edge" effect. Uses @property for the angle animation which is well-supported in modern browsers. Falls back to a static glow border in older browsers.
 
 ## Demo System
-Uses base64url encoding per Section 15 guidelines. All placeholder values (Volt Electric) are realistic and pass SEO/accessibility checks without the d parameter.
+Uses base64url encoding per Section 15 guidelines. All placeholder values (Hawking Electrical) are realistic and pass SEO/accessibility checks without the d parameter.

@@ -4,7 +4,7 @@
 - This is a demo/template site for cold-call sales demos (Section 15 of guidelines)
 - Dark theme with electric glow/pulse animations as the signature visual identity
 - Multi-page: index.html, services.html, about.html, contact.html, privacy.html, 404.html
-- Placeholder business: Volt Electric, Austin TX
+- Placeholder business: Hawking Electrical, Austin TX
 - URL parameter demo system (base64url `d` param) for swapping business details
 - Demo banner, noindex on all pages, no sitemap, disabled form submission
 
