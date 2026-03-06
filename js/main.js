@@ -10,9 +10,9 @@
      ------------------------------------------ */
   var DEFAULTS = {
     name: 'Volt Electric',
-    phone: '5125550187',
+    phone: '5129883749',
     email: 'info@voltelectric.com',
-    street: '2841 Thunder Road',
+    street: '4712 Braker Lane',
     city: 'Austin',
     state: 'TX',
     zip: '78701'
