@@ -240,7 +240,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-outline {
-  background: transparent;
+  background: rgba(10, 14, 26, 0.6);
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
@@ -419,10 +419,24 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 600px 400px at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 350px at 80% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 400px 300px at 50% 80%, rgba(255, 204, 0, 0.04) 0%, transparent 70%),
-    var(--color-bg);
+    linear-gradient(to right, rgba(10, 14, 26, 0.78) 0%, rgba(10, 14, 26, 0.50) 50%, rgba(10, 14, 26, 0.78) 100%),
+    url('/images/hero-480w.webp') center/cover no-repeat;
+}
+
+@media (min-width: 600px) {
+  .hero-bg {
+    background:
+      linear-gradient(to right, rgba(10, 14, 26, 0.78) 0%, rgba(10, 14, 26, 0.50) 50%, rgba(10, 14, 26, 0.78) 100%),
+      url('/images/hero-800w.webp') center/cover no-repeat;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-bg {
+    background:
+      linear-gradient(to right, rgba(10, 14, 26, 0.78) 0%, rgba(10, 14, 26, 0.50) 50%, rgba(10, 14, 26, 0.78) 100%),
+      url('/images/hero.webp') center/cover no-repeat;
+  }
 }
 
 .hero-content {
@@ -445,7 +459,8 @@ h1, h2, h3, h4 {
 .hero > .container > p,
 .hero-content > p {
   font-size: clamp(1.0625rem, 2vw, 1.25rem);
-  color: var(--color-text-muted);
+  color: #c8c8c8;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1), 1px 1px 3px rgba(0, 0, 0, 1), -1px -1px 3px rgba(0, 0, 0, 0.8), 0 1px 5px rgba(0, 0, 0, 0.9);
   max-width: 560px;
   margin-bottom: 2rem;
 }
@@ -1243,23 +1258,6 @@ h1, h2, h3, h4 {
     animation: phone-glow 3s ease-in-out infinite;
   }
 
-  /* --- Hero Background Animation --- */
-  @keyframes hero-bg-shift {
-    0%, 100% {
-      background-position: 20% 50%, 80% 30%, 50% 80%;
-    }
-    33% {
-      background-position: 25% 45%, 75% 35%, 55% 75%;
-    }
-    66% {
-      background-position: 18% 55%, 82% 25%, 45% 85%;
-    }
-  }
-
-  .hero-bg {
-    animation: hero-bg-shift 12s ease-in-out infinite;
-    background-size: 600px 400px, 500px 350px, 400px 300px, 100% 100%;
-  }
 
   /* --- Neon Flicker on Logo Bolt (very subtle) --- */
   @keyframes neon-flicker {
