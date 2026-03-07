@@ -42,6 +42,10 @@
 5. privacy.html — Privacy policy (noindex, no OG/canonical/JSON-LD)
 6. 404.html — Custom error page (noindex)
 
+## TODO
+- Demo system: handle missing optional fields gracefully — when a prospect provides only `name` and `phone` (no email, address, etc.), hide the corresponding DOM elements rather than showing placeholder defaults.
+- Form focus indicators: manually test whether the border-color + glow change on form inputs is sufficient for keyboard users, or if the 2px outline ring should also be kept. Current CSS removes the outline and relies on border+glow only.
+
 ## Build Order
 1. Project setup (done)
 2. CSS foundation

@@ -126,6 +126,7 @@
         var ld = JSON.parse(ldScript.textContent);
         ld.name = d.name;
         ld.telephone = '+' + (d.phone.replace(/\D/g, '').length === 10 ? '1' : '') + d.phone.replace(/\D/g, '');
+        ld.email = d.email;
         if (ld.address) {
           ld.address.streetAddress = d.street;
           ld.address.addressLocality = d.city;

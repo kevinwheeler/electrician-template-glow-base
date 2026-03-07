@@ -44,6 +44,7 @@
   }
   </script>
   <script src="/js/main.js" defer></script>
+  <noscript><style>.demo-overlay{display:none}</style></noscript>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -186,7 +187,10 @@
       <div class="container">
         <div class="about-preview">
           <div class="about-preview-img fade-in">
-            <img src="/images/about-preview.webp" alt="Hawking Electrical team member inspecting a residential electrical panel" width="1200" height="896" loading="lazy" decoding="async">
+            <img src="/images/about-preview-600w.webp"
+              srcset="/images/about-preview-600w.webp 600w, /images/about-preview.webp 1200w"
+              sizes="(min-width: 768px) 50vw, 100vw"
+              alt="Hawking Electrical team member inspecting a residential electrical panel" width="1200" height="896" loading="lazy" decoding="async">
           </div>
           <div class="about-preview-content fade-in">
             <h2 id="about-heading">Austin's Trusted Electrical Experts</h2>
