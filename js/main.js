@@ -220,40 +220,6 @@
     });
   }
 
-  /* ------------------------------------------
-     Scroll-Triggered Fade-In Animations
-     ------------------------------------------ */
-  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    var fadeEls = document.querySelectorAll('.fade-in');
-
-    if (fadeEls.length > 0) {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var parent = entry.target.parentElement;
-              var siblings = parent
-                ? Array.from(parent.querySelectorAll(':scope > .fade-in'))
-                : [];
-              var siblingIndex = siblings.indexOf(entry.target);
-              var delay = siblingIndex >= 0 ? siblingIndex * 100 : 0;
-
-              setTimeout(function () {
-                entry.target.classList.add('is-visible');
-              }, delay);
-
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.05 }
-      );
-
-      fadeEls.forEach(function (el) {
-        observer.observe(el);
-      });
-    }
-  }
 
   /* ------------------------------------------
      Demo Modal — timed close button
@@ -306,5 +272,14 @@
         statusEl.style.display = 'block';
       }, 1200);
     });
+  }
+})();
+
+// Set data-text attributes for CSS ::after pseudo-element glow effect
+(function() {
+  var selectors = '.hero h1 span, .section-header h2, .about-preview-content h2, .cta-section h2';
+  var els = document.querySelectorAll(selectors);
+  for (var i = 0; i < els.length; i++) {
+    els[i].setAttribute('data-text', els[i].textContent);
   }
 })();

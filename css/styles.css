@@ -1101,75 +1101,48 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
-/* --- Fade-in Animations (base state) --- */
-.fade-in {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* ============================================
    Electric Glow Effects
    (all inside prefers-reduced-motion: no-preference)
    ============================================ */
 
-/* --- @property for conic-gradient border animation --- */
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  /* --- Hero H1 Glow Pulse --- */
-  @keyframes glow-pulse-strong {
-    0%, 100% {
-      text-shadow:
-        0 0 14px rgba(0, 212, 255, 0.7),
-        0 0 35px rgba(0, 212, 255, 0.45),
-        0 0 70px rgba(0, 212, 255, 0.2);
-    }
-    50% {
-      text-shadow:
-        0 0 28px rgba(0, 212, 255, 0.9),
-        0 0 60px rgba(0, 212, 255, 0.55),
-        0 0 100px rgba(0, 212, 255, 0.25);
-    }
+  /* --- GPU-friendly Text Glow Pulse --- */
+  /* Animate opacity on a pseudo-element instead of text-shadow directly,
+     because opacity is GPU-compositable while text-shadow forces CPU repaints in Chromium. */
+  @keyframes glow-fade {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
   }
 
-  .hero h1 span {
-    animation: glow-pulse-strong 3s ease-in-out infinite;
-  }
-
-  /* --- Section Heading Glow Pulse (moderate) --- */
-  @keyframes glow-pulse-moderate {
-    0%, 100% {
-      text-shadow:
-        0 0 10px rgba(0, 212, 255, 0.5),
-        0 0 28px rgba(0, 212, 255, 0.3);
-    }
-    50% {
-      text-shadow:
-        0 0 22px rgba(0, 212, 255, 0.7),
-        0 0 50px rgba(0, 212, 255, 0.35);
-    }
-  }
-
+  .hero h1 span,
   .section-header h2,
   .about-preview-content h2,
   .cta-section h2 {
-    animation: glow-pulse-strong 3s ease-in-out infinite;
+    position: relative;
+    text-shadow:
+      0 0 14px rgba(0, 212, 255, 0.7),
+      0 0 35px rgba(0, 212, 255, 0.45),
+      0 0 70px rgba(0, 212, 255, 0.2);
+  }
+
+  .hero h1 span::after,
+  .section-header h2::after,
+  .about-preview-content h2::after,
+  .cta-section h2::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: transparent;
+    text-shadow:
+      0 0 28px rgba(0, 212, 255, 0.9),
+      0 0 60px rgba(0, 212, 255, 0.55),
+      0 0 100px rgba(0, 212, 255, 0.25);
+    animation: glow-fade 3s ease-in-out infinite;
+    pointer-events: none;
   }
 
   /* --- Logo Subtle Glow --- */
@@ -1230,51 +1203,50 @@ h1, h2, h3, h4 {
     animation: none;
   }
 
-  /* --- Box Glow Pulse on Service Cards --- */
-  @keyframes box-glow-pulse {
-    0%, 100% {
-      box-shadow: 0 0 12px rgba(0, 212, 255, 0.15), 0 0 24px rgba(0, 212, 255, 0.08);
-    }
-    50% {
-      box-shadow: 0 0 22px rgba(0, 212, 255, 0.25), 0 0 44px rgba(0, 212, 255, 0.12);
-    }
-  }
-
+  /* --- Service Card Glow & Border Setup --- */
   .service-card {
-    animation: box-glow-pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.18), 0 0 30px rgba(0, 212, 255, 0.1);
+    overflow: hidden;
+    background: transparent;
+    border-color: transparent;
+    contain: layout style paint;
   }
-
-  .service-card:nth-child(1) { animation-delay: 0s; }
-  .service-card:nth-child(2) { animation-delay: 0.5s; }
-  .service-card:nth-child(3) { animation-delay: 1s; }
-  .service-card:nth-child(4) { animation-delay: 1.5s; }
-  .service-card:nth-child(5) { animation-delay: 2s; }
-  .service-card:nth-child(6) { animation-delay: 2.5s; }
 
   /* --- Animated Electric Border --- */
   @keyframes rotate-border {
-    to { --border-angle: 360deg; }
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
   .service-card::before {
     content: '';
     position: absolute;
-    inset: -1px;
-    border-radius: 13px;
-    padding: 1px;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%) rotate(0deg);
     background: conic-gradient(
-      from var(--border-angle),
+      from 0deg,
       transparent 60%,
       var(--color-primary) 80%,
       var(--color-accent) 90%,
       var(--color-primary) 100%
     );
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     animation: rotate-border 4s linear infinite;
     pointer-events: none;
+    z-index: -1;
+    will-change: transform;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 11px;
+    background: var(--color-bg-card);
+    pointer-events: none;
+    z-index: -1;
   }
 
   .service-card:nth-child(2)::before { animation-delay: -0.67s; }
@@ -1288,18 +1260,9 @@ h1, h2, h3, h4 {
     text-shadow: 0 0 14px var(--color-primary-dim), 0 0 36px rgba(0, 212, 255, 0.2);
   }
 
-  /* --- CTA Phone Glow Pulse --- */
-  @keyframes phone-glow {
-    0%, 100% {
-      text-shadow: 0 0 16px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3);
-    }
-    50% {
-      text-shadow: 0 0 28px rgba(0, 212, 255, 0.85), 0 0 56px rgba(0, 212, 255, 0.4);
-    }
-  }
-
+  /* --- CTA Phone Glow (static to avoid text-shadow repaint jank in Chromium) --- */
   .cta-phone {
-    animation: phone-glow 3s ease-in-out infinite;
+    text-shadow: 0 0 16px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3);
   }
 
 
@@ -1318,36 +1281,45 @@ h1, h2, h3, h4 {
   }
 
   /* --- Service Detail Cards get border too --- */
+  .service-detail-card {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.18), 0 0 30px rgba(0, 212, 255, 0.1);
+    overflow: hidden;
+    background: transparent;
+    border-color: transparent;
+    contain: layout style paint;
+  }
+
   .service-detail-card::before {
     content: '';
     position: absolute;
-    inset: -1px;
-    border-radius: 13px;
-    padding: 1px;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%) rotate(0deg);
     background: conic-gradient(
-      from var(--border-angle),
+      from 0deg,
       transparent 60%,
       var(--color-primary) 80%,
       var(--color-accent) 90%,
       var(--color-primary) 100%
     );
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     animation: rotate-border 4s linear infinite;
     pointer-events: none;
+    z-index: -1;
+    will-change: transform;
   }
 
-  .service-detail-card {
-    animation: box-glow-pulse 3s ease-in-out infinite;
+  .service-detail-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 11px;
+    background: var(--color-bg-card);
+    pointer-events: none;
+    z-index: -1;
   }
 
-  .service-detail-card:nth-child(2) { animation-delay: 0.5s; }
-  .service-detail-card:nth-child(3) { animation-delay: 1s; }
-  .service-detail-card:nth-child(4) { animation-delay: 1.5s; }
-  .service-detail-card:nth-child(5) { animation-delay: 2s; }
-  .service-detail-card:nth-child(6) { animation-delay: 2.5s; }
   .service-detail-card:nth-child(2)::before { animation-delay: -0.67s; }
   .service-detail-card:nth-child(3)::before { animation-delay: -1.33s; }
   .service-detail-card:nth-child(4)::before { animation-delay: -2s; }
@@ -1356,10 +1328,8 @@ h1, h2, h3, h4 {
 
   /* --- Value cards subtle glow --- */
   .value-card {
-    animation: box-glow-pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.18), 0 0 30px rgba(0, 212, 255, 0.1);
   }
-  .value-card:nth-child(2) { animation-delay: 0.7s; }
-  .value-card:nth-child(3) { animation-delay: 1.4s; }
 }
 
 /* ============================================
