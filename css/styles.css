@@ -1,5 +1,5 @@
 /* ============================================
-   Hawking Electrical — Electrician Template Styles
+   Hawking Electrical - Electrician Template Styles
    ============================================ */
 
 /* --- @font-face --- */
@@ -1333,7 +1333,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================
-   Responsive — Tablet (768px+)
+   Responsive - Tablet (768px+)
    ============================================ */
 @media (min-width: 768px) {
   .container {
@@ -1436,7 +1436,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================
-   Responsive — Desktop (1024px+)
+   Responsive - Desktop (1024px+)
    ============================================ */
 @media (min-width: 1024px) {
   .services-grid {

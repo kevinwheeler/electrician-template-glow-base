@@ -1,4 +1,4 @@
-# Electrician Template — Rationale
+# Electrician Template - Rationale
 
 ## Dark Theme Choice
 Dark backgrounds are essential for glow effects to read properly. Electric cyan and amber glow effects look washed out on light backgrounds. The entire visual identity depends on this.

@@ -1,5 +1,5 @@
 /* ============================================
-   Hawking Electrical — Electrician Template JS
+   Hawking Electrical - Electrician Template JS
    ============================================ */
 
 (function () {
@@ -19,7 +19,7 @@
   };
 
   /* ------------------------------------------
-     Demo system — decode base64url d parameter
+     Demo system - decode base64url d parameter
      ------------------------------------------ */
   function decodeDemo(str) {
     try {
@@ -163,7 +163,7 @@
   }
 
   /* ------------------------------------------
-     Link rewriting — append d parameter
+     Link rewriting - append d parameter
      ------------------------------------------ */
   function rewriteLinks(dParam) {
     if (!dParam) return;
@@ -222,7 +222,7 @@
 
 
   /* ------------------------------------------
-     Demo Modal — timed close button
+     Demo Modal - timed close button
      ------------------------------------------ */
   var demoOverlay = document.getElementById('demo-overlay');
   var demoClose = document.getElementById('demo-close');
@@ -248,7 +248,7 @@
   }
 
   /* ------------------------------------------
-     Contact Form (Demo — disabled submission)
+     Contact Form (Demo - disabled submission)
      ------------------------------------------ */
   var contactForm = document.getElementById('contact-form');
 

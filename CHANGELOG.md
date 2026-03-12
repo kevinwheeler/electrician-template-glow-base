@@ -1,4 +1,4 @@
-# Electrician Template — Changelog
+# Electrician Template - Changelog
 
 ## 2026-03-06 (session 2)
 - Replaced fixed demo banner with centered modal overlay (DEMO ONLY popup)
@@ -6,8 +6,8 @@
   - Blurred backdrop, electric-themed modal card with cyan border/glow
   - Applied to all 6 HTML pages
 - Cleaned up dead --demo-banner-height CSS variable and simplified body/header/scroll-margin values
-- Tablet visual review (768px) — all 6 pages verified, no issues found
-- Accessibility audit — zero issues (all landmarks, heading hierarchy, alt text, form labels correct)
+- Tablet visual review (768px) - all 6 pages verified, no issues found
+- Accessibility audit - zero issues (all landmarks, heading hierarchy, alt text, form labels correct)
 
 ## 2026-03-06
 - Project setup: directory structure, git init, documentation files, config files

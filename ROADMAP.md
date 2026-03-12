@@ -1,4 +1,4 @@
-# Electrician Template — Roadmap
+# Electrician Template - Roadmap
 
 ## Project Notes
 - This is a demo/template site for cold-call sales demos (Section 15 of guidelines)
@@ -35,22 +35,22 @@
 - Mobile: reduced glow blur, disabled rotating border
 
 ## Pages
-1. index.html — Hero, services overview (6 cards), about preview, CTA band, footer
-2. services.html — Detailed service descriptions
-3. about.html — Company story, experience
-4. contact.html — Contact form (disabled), contact info
-5. privacy.html — Privacy policy (noindex, no OG/canonical/JSON-LD)
-6. 404.html — Custom error page (noindex)
+1. index.html - Hero, services overview (6 cards), about preview, CTA band, footer
+2. services.html - Detailed service descriptions
+3. about.html - Company story, experience
+4. contact.html - Contact form (disabled), contact info
+5. privacy.html - Privacy policy (noindex, no OG/canonical/JSON-LD)
+6. 404.html - Custom error page (noindex)
 
 ## TODO
-- Demo system: handle missing optional fields gracefully — when a prospect provides only `name` and `phone` (no email, address, etc.), hide the corresponding DOM elements rather than showing placeholder defaults.
+- Demo system: handle missing optional fields gracefully - when a prospect provides only `name` and `phone` (no email, address, etc.), hide the corresponding DOM elements rather than showing placeholder defaults.
 - Form focus indicators: manually test whether the border-color + glow change on form inputs is sufficient for keyboard users, or if the 2px outline ring should also be kept. Current CSS removes the outline and relies on border+glow only.
 
 ## Build Order
 1. Project setup (done)
 2. CSS foundation
 3. JS skeleton
-4. Hero section — iterate until excellent
+4. Hero section - iterate until excellent
 5. Remaining index.html sections
 6. Inner pages
 7. Visual review at all breakpoints
