@@ -1,5 +1,16 @@
 # Electrician Template - Changelog
 
+## 2026-03-12
+- Replaced "Emergency Repairs" service with "Ceiling Fan Installation" across index.html and services.html
+  - Most small/new electricians don't offer 24/7 emergency service; ceiling fans are bread-and-butter work
+  - New fan icon SVG, updated descriptions and sub-service bullet list
+- Replaced experience-based stats (10+ Years, 2,500+ Jobs, 4.9 Stars) with stats any new business can claim:
+  - 100% Licensed & Insured, 100% Satisfaction Guaranteed, 100% Free Estimates
+  - Updated on both index.html (about preview) and about.html (By the Numbers section)
+  - about.html went from 4 stats to 3 (removed experience-based stats, kept the 3 new defaults)
+- Updated meta descriptions and footer text to remove "emergency repairs/services" references
+- Updated "For over a decade" copy on index.html to be suitable for new businesses
+
 ## 2026-03-06 (session 2)
 - Replaced fixed demo banner with centered modal overlay (DEMO ONLY popup)
   - 3-second countdown timer before Close button enables
