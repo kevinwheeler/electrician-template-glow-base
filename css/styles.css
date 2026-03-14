@@ -321,6 +321,7 @@ h1, h2, h3, h4 {
 }
 
 .logo {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.625rem;
@@ -1155,23 +1156,36 @@ h1, h2, h3, h4 {
     pointer-events: none;
   }
 
-  /* --- Logo Subtle Glow (static to avoid per-frame filter repaint) --- */
+  /* --- Logo Glow Pulse (GPU-friendly: static base + opacity-animated overlay) --- */
   .logo svg {
-    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.45));
+    filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.35));
+  }
+
+  .logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    box-shadow: 0 0 14px rgba(0, 212, 255, 0.7), 0 0 28px rgba(0, 212, 255, 0.35);
+    animation: glow-fade 3s ease-in-out infinite;
+    pointer-events: none;
   }
 
   /* --- Yellow Button Glow Pulse --- */
   @keyframes btn-glow-pulse {
     0%, 100% {
-      box-shadow: 0 0 18px rgba(255, 204, 0, 0.55), 0 0 40px rgba(255, 204, 0, 0.2);
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.3), 0 0 20px rgba(255, 204, 0, 0.1);
     }
     50% {
-      box-shadow: 0 0 30px rgba(255, 204, 0, 0.8), 0 0 60px rgba(255, 204, 0, 0.35), 0 0 90px rgba(255, 204, 0, 0.15);
+      box-shadow: 0 0 30px rgba(255, 204, 0, 0.85), 0 0 60px rgba(255, 204, 0, 0.4), 0 0 90px rgba(255, 204, 0, 0.15);
     }
   }
 
   .btn-primary {
-    animation: btn-glow-pulse 8s ease-in-out infinite;
+    animation: btn-glow-pulse 3.5s ease-in-out infinite;
   }
 
   .btn-primary:hover {
@@ -1191,16 +1205,16 @@ h1, h2, h3, h4 {
   /* --- Blue Button Glow Pulse (moderate) --- */
   @keyframes btn-blue-glow-pulse-moderate {
     0%, 100% {
-      box-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 28px rgba(0, 212, 255, 0.3);
+      box-shadow: 0 0 6px rgba(0, 212, 255, 0.25), 0 0 14px rgba(0, 212, 255, 0.12);
     }
     50% {
-      box-shadow: 0 0 22px rgba(0, 212, 255, 0.7), 0 0 50px rgba(0, 212, 255, 0.35);
+      box-shadow: 0 0 22px rgba(0, 212, 255, 0.75), 0 0 50px rgba(0, 212, 255, 0.4);
     }
   }
 
   .btn-outline,
   .btn-dark {
-    animation: btn-blue-glow-pulse-moderate 8s ease-in-out infinite;
+    animation: btn-blue-glow-pulse-moderate 4.5s ease-in-out infinite;
   }
 
   .btn-outline:hover,
