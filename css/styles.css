@@ -2,6 +2,13 @@
    Hawking Electrical - Electrician Template Styles
    ============================================ */
 
+/* --- Custom property for animatable conic-gradient angle --- */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* --- @font-face --- */
 @font-face {
   font-family: 'Rajdhani';
@@ -302,8 +309,6 @@ h1, h2, h3, h4 {
   z-index: 1000;
   height: var(--header-height);
   background: rgba(10, 14, 26, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -361,8 +366,6 @@ h1, h2, h3, h4 {
   left: 0;
   right: 0;
   background: rgba(10, 14, 26, 0.98);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
   padding: 1.5rem 1.25rem;
   opacity: 0;
@@ -495,6 +498,13 @@ h1, h2, h3, h4 {
 /* --- Section --- */
 .section {
   padding: 5rem 0;
+}
+
+.section,
+.cta-section,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .section-alt {
@@ -1145,14 +1155,9 @@ h1, h2, h3, h4 {
     pointer-events: none;
   }
 
-  /* --- Logo Subtle Glow --- */
-  @keyframes glow-pulse-subtle {
-    0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.35)); }
-    50% { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.6)); }
-  }
-
+  /* --- Logo Subtle Glow (static to avoid per-frame filter repaint) --- */
   .logo svg {
-    animation: glow-pulse-subtle 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.45));
   }
 
   /* --- Yellow Button Glow Pulse --- */
@@ -1166,7 +1171,7 @@ h1, h2, h3, h4 {
   }
 
   .btn-primary {
-    animation: btn-glow-pulse 3s ease-in-out infinite;
+    animation: btn-glow-pulse 8s ease-in-out infinite;
   }
 
   .btn-primary:hover {
@@ -1195,7 +1200,7 @@ h1, h2, h3, h4 {
 
   .btn-outline,
   .btn-dark {
-    animation: btn-blue-glow-pulse-moderate 3s ease-in-out infinite;
+    animation: btn-blue-glow-pulse-moderate 8s ease-in-out infinite;
   }
 
   .btn-outline:hover,
@@ -1212,31 +1217,32 @@ h1, h2, h3, h4 {
     contain: layout style paint;
   }
 
-  /* --- Animated Electric Border --- */
+  /* --- Animated Electric Border (uses @property for GPU-friendly gradient rotation) --- */
   @keyframes rotate-border {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    from { --border-angle: 0deg; }
+    to { --border-angle: 360deg; }
   }
 
   .service-card::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    transform: translate(-50%, -50%) rotate(0deg);
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
     background: conic-gradient(
-      from 0deg,
+      from var(--border-angle),
       transparent 60%,
       var(--color-primary) 80%,
       var(--color-accent) 90%,
       var(--color-primary) 100%
     );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
     animation: rotate-border 4s linear infinite;
     pointer-events: none;
     z-index: -1;
-    will-change: transform;
   }
 
   .service-card::after {
@@ -1292,22 +1298,23 @@ h1, h2, h3, h4 {
   .service-detail-card::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    transform: translate(-50%, -50%) rotate(0deg);
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
     background: conic-gradient(
-      from 0deg,
+      from var(--border-angle),
       transparent 60%,
       var(--color-primary) 80%,
       var(--color-accent) 90%,
       var(--color-primary) 100%
     );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
     animation: rotate-border 4s linear infinite;
     pointer-events: none;
     z-index: -1;
-    will-change: transform;
   }
 
   .service-detail-card::after {
@@ -1352,8 +1359,6 @@ h1, h2, h3, h4 {
     align-items: center;
     gap: 2rem;
     background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     border: none;
     padding: 0;
     opacity: 1;
